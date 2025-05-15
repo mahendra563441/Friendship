@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Beautiful Girl! 💖</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Sacramento&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5e1ee 0%, #e1c4ff 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.97);
+            padding: 2.5rem 2rem;
+            border-radius: 25px;
+            box-shadow: 0 12px 32px rgba(255, 111, 145, 0.13), 0 1.5px 5px rgba(0,0,0,0.07);
+            max-width: 600px;
+            margin: 5vh auto;
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.3rem;
+            color: #ff6f91;
+            margin-bottom: 1.1rem;
+            text-shadow: 0 4px 20px #ffd6e7;
+            letter-spacing: 1.5px;
+        }
+        p {
+            font-size: 1.18rem;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 1.4rem;
+        }
+        .highlight {
+            color: #ff6f91;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffe3ed 60%, #e1c4ff 100%);
+            border-radius: 8px;
+            padding: 0 5px;
+            transition: background 0.3s;
+        }
+        .heartbeat {
+            animation: heartbeat 1.3s infinite;
+            display: inline-block;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1);}
+            20%, 60% { transform: scale(1.25);}
+            40%, 80% { transform: scale(1);}
+        }
+        .btn-custom {
+            padding: 13px 32px;
+            margin: 8px;
+            font-size: 1.13rem;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-weight: 600;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(255, 111, 145, 0.10);
+        }
+        .btn-yes {
+            background: linear-gradient(90deg, #ff6f91 60%, #ffd700 100%);
+            color: #fff;
+            box-shadow: 0 0 10px #ffd6e7;
+        }
+        .btn-no {
+            background: #ff4d4d;
+            color: #fff;
+        }
+        .btn-custom:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 6px 24px #ffb0c4;
+            filter: brightness(1.07);
+        }
+        .heart {
+            color: #ff6f91;
+            font-size: 1.6rem;
+            margin: 0 4px;
+            filter: drop-shadow(0 0 8px #ffd6e7);
+        }
+        .edit-icon {
+            font-size: 14px;
+            color: #888;
+            opacity: 0.4;
+            cursor: pointer;
+            margin-left: 4px;
+            transition: opacity 0.3s;
+        }
+        .edit-icon:hover { opacity: 0.8; }
+        .inline-editor {
+            display: inline-block;
+            width: auto;
+            min-width: 80px;
+            padding: 3px 7px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            margin: 0 3px;
+        }
+        .edit-actions {
+            display: inline-block;
+            margin-left: 6px;
+        }
+        .edit-actions button {
+            background: none;
+            border: none;
+            color: #ff6f91;
+            font-size: 1.1em;
+            margin: 0 2px;
+            cursor: pointer;
+        }
+        .undo-redo {
+            margin: 8px 0 0 0;
+            text-align: right;
+        }
+        .undo-redo button {
+            background: none;
+            border: none;
+            color: #ff6f91;
+            font-size: 1.15em;
+            margin: 0 2px;
+            cursor: pointer;
+        }
+        /* Heart Confetti */
+        .confetti-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            animation: floatDown 3.5s linear forwards;
+        }
+        @keyframes floatDown {
+            0% { transform: translateY(-40px) scale(1);}
+            100% { transform: translateY(110vh) scale(1.2);}
+        }
+        @media (max-width: 600px) {
+            .container { padding: 1.2rem 0.5rem; }
+            h1 { font-size: 2.1rem; }
+            .btn-custom { padding: 10px 18px; font-size: 1rem;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container shadow-lg">
+        <h1 id="greeting">Hey! 👋</h1>
+        <div id="message-content">
+            <p>
+                Hi, main <span class="highlight" id="name-field">MaHeNdRa...JoGi...</span>
+                <i class="fas fa-pencil-alt edit-icon" aria-label="Edit name" onclick="toggleInlineEditor('name-field')"></i>
+                hoon, aur <span class="highlight" id="meeting-field">hum iss shaadi mein mile hain</span>
+                <i class="fas fa-pencil-alt edit-icon" aria-label="Edit meeting" onclick="toggleInlineEditor('meeting-field')"></i>-
+                yahan ki vibes kuch khaas hain, hai na? 😊<br>
+                Socha, <span class="highlight">dosti</span> ka ek naya chapter shuru ho jaye?<br>
+                Agar tum bhi chaaho, toh WhatsApp par ek <span class="highlight">“Yes, friend! 😊”</span> bhej dena-<br>
+                mera number: <span class="highlight">[7878022373]</span>.<br>
+                Main yahin hoon, ek <span class="highlight">beautiful girl</span> ke message ka intezaar karta hua!
+            </p>
+            <p>
+                Toh kya kehti ho? <span class="highlight">Dosti ka plan</span> banayein? <i class="fas fa-heart heart heartbeat"></i>
+            </p>
+            <p>
+                Aur agar tum interested nahi ho, toh tension bilkul mat lena!<br>
+                Yeh shaam hai <span class="highlight">chill</span> ke liye ✨-bas <span class="highlight">“No, I’m not interested”</span> keh dena.<br>
+                Honesty matters! 😉
+            </p>
+            <p class="heartbeat" style="font-size:1.35rem;">
+                <span class="highlight">Beautiful...Girl...</span> <i class="fas fa-heart heart"></i>
+            </p>
+        </div>
+        <div class="mt-3">
+            <a href="https://wa.me/917878022373?text=Yes,%20friend!%20😊" class="btn-custom btn-yes" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> Yes, friend! 😊
+            </a>
+            <button class="btn-custom btn-no" onclick="showNoMessage()">
+                No, I’m not interested
+            </button>
+        </div>
+        <div class="undo-redo">
+            <button onclick="undoEdit()" title="Undo"><i class="fas fa-undo"></i></button>
+            <button onclick="redoEdit()" title="Redo"><i class="fas fa-redo"></i></button>
+        </div>
+    </div>
+    <!-- Heart Confetti Script -->
+    <script>
+        function createHeartConfetti() {
+            const heart = document.createElement('span');
+            heart.className = 'confetti-heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(), 3500);
+        }
+        setInterval(createHeartConfetti, 700);
+    </script>
+    <!-- Typed.js for Greeting -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        new Typed('#greeting', {
+            strings: ['Hey! 👋', 'Hello Beautiful! 💖', 'Namaste, Gorgeous! 🌸'],
+            typeSpeed: 55,
+            backSpeed: 30,
+            loop: true
+        });
+    </script>
+    <!-- Inline Editor Logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
+    <script>
+        const editHistory = [];
+        let historyIndex = -1;
+
+        function toggleInlineEditor(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (!field) return;
+            const text = field.textContent;
+            const input = document.createElement('input');
+            input.className = 'inline-editor';
+            input.value = text;
+            field.style.display = 'none';
+            field.parentNode.insertBefore(input, field.nextSibling);
+
+            // Add save/cancel actions
+            const actions = document.createElement('span');
+            actions.className = 'edit-actions';
+            actions.innerHTML = `
+                <button title="Save" onclick="saveEdit('${fieldId}', this)">✔️</button>
+                <button title="Cancel" onclick="cancelEdit('${fieldId}', this)">❌</button>
+            `;
+            input.parentNode.insertBefore(actions, input.nextSibling);
+
+            input.focus();
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') saveEdit(fieldId, actions);
+                if (e.key === 'Escape') cancelEdit(fieldId, actions);
+            });
+        }
+
+        function saveEdit(fieldId, actionsNode) {
+            const input = actionsNode.previousSibling;
+            const field = document.getElementById(fieldId);
+            const newText = DOMPurify.sanitize(input.value.trim());
+            if (newText) {
+                field.textContent = newText;
+                saveToHistory(fieldId, newText);
+            }
+            cleanupEdit(field, input, actionsNode);
+        }
+
+        function cancelEdit(fieldId, actionsNode) {
+            const input = actionsNode.previousSibling;
+            const field = document.getElementById(fieldId);
+            cleanupEdit(field, input, actionsNode);
+        }
+
+        function cleanupEdit(field, input, actionsNode) {
+            field.style.display = 'inline';
+            input.remove();
+            actionsNode.remove();
+        }
+
+        function saveToHistory(fieldId, text) {
+            editHistory.splice(historyIndex + 1);
+            editHistory.push({ fieldId, text });
+            historyIndex++;
+            try {
+                localStorage.setItem('editHistory', JSON.stringify(editHistory));
+            } catch {}
+        }
+
+        function undoEdit() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                const { fieldId, text } = editHistory[historyIndex];
+                const field = document.getElementById(fieldId);
+                field.textContent = text;
+            }
+        }
+
+        function redoEdit() {
+            if (historyIndex < editHistory.length - 1) {
+                historyIndex++;
+                const { fieldId, text } = editHistory[historyIndex];
+                const field = document.getElementById(fieldId);
+                field.textContent = text;
+            }
+        }
+
+        // Load history
+        try {
+            const savedHistory = localStorage.getItem('editHistory');
+            if (savedHistory) {
+                const parsedHistory = JSON.parse(savedHistory);
+                parsedHistory.forEach(({ fieldId, text }) => {
+                    const field = document.getElementById(fieldId);
+                    if (field) field.textContent = text;
+                });
+                editHistory.push(...parsedHistory);
+                historyIndex = editHistory.length - 1;
+            }
+        } catch {}
+
+        // No Button Message
+        function showNoMessage() {
+            alert("No worries, yaar! 😊 Thanks for being honest. Enjoy the shaadi vibes! ✨");
+        }
+    </script>
+</body>
+</html>
